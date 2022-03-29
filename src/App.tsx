@@ -8,23 +8,33 @@ import HomePage from './pages/Home/HomeComponent';
 import config from './utils/firebaseSetup';
 import { initializeApp } from 'firebase/app';
 
-initializeApp(config.firebaseConfig);
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
+
+
+
+initializeApp(config.firebaseConfig);
+const theme = createTheme()
 function App() {
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={theme}>
+              <CssBaseline />
+        <BrowserRouter>
             <Routes>
                 <Route
                     path="/"
                     element={
                         <AuthRoute>
+                            
                             <HomePage />
                         </AuthRoute>
                     }
+                    
                 />
                 <Route path="/login" element={<LoginPage />} />
             </Routes>
         </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
