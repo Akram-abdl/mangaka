@@ -15,7 +15,7 @@ export default function MangaDetailsComponent({
   description,
 }: Props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 1800 }}>
       <CardMedia
         component="img"
         height="140"
@@ -32,6 +32,9 @@ export default function MangaDetailsComponent({
       </CardContent>
       <CardActions>
         <Link to={id}>Acheter</Link>
+      </CardActions>
+      <CardActions>
+        <Link to = {id}>Commencer à lire</Link>
       </CardActions>
     </Card>
   );
