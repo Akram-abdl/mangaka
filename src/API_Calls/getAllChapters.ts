@@ -1,15 +1,14 @@
-import { Chapter } from "../models/Chapter";
+import { ChapterList } from "../models/ChapterDetails";
 
 
-export const getAllChapters = async (mangaId : string): Promise<Chapter[]> => {
+export const getAllChapters = async (mangaId : string): Promise<ChapterList> => {
   try {
     const response = await fetch(
-    `https://api.mangadex.org/chapter?manga=${mangaId}&order%5Bchapter%5D=asc&limit=100&translatedLanguage%5B%5D=en`
+    `https://api.mangadex.org/chapter?manga=${mangaId}&order%5Bchapter%5D=asc&limit=10&translatedLanguage%5B%5D=en`
     ).then((response) => response.json());
-    console.log(response);
     return response.data;
   } catch (e) {
     console.error(e);
-    return [];
+    throw new Error("can't fetch all chapters");
   }
 };

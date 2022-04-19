@@ -12,6 +12,7 @@ import { RouteUrls } from "./config";
 import HomePage from "./pages/Home/Home";
 import LoginPage from "./pages/Login/Login";
 import MangaDetails from "./pages/MangaDetails/MangaDetails";
+import ReadChapter from "./pages/ReadChapter/ReadChapter";
 
 initializeApp(config.firebaseConfig);
 const theme = createTheme();
@@ -34,6 +35,14 @@ function App() {
             element={
               <AuthRoute>
                 <MangaDetails />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path={`${RouteUrls.MangaDetails}/:mangaId/:chapterId`}
+            element={
+              <AuthRoute>
+                <ReadChapter />
               </AuthRoute>
             }
           />

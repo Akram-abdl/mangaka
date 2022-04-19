@@ -6,14 +6,20 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { RouteUrls } from "../../config";
+import { ChapterList } from "../../models/ChapterDetails";
 
-type Props = { title: string; id: string; description: string };
+type Props = { title: string; id: string; description: string, chapters: ChapterList };
 
 export default function MangaDetailsComponent({
   title,
   id,
   description,
+  chapters,
 }: Props) {
+
+  console.log("variable chapters de MangaDetailsComponent = " ,{chapters})
+
   return (
     <Card sx={{ maxWidth: 1800 }}>
       <CardMedia
@@ -34,7 +40,7 @@ export default function MangaDetailsComponent({
         <Link to={id}>Acheter</Link>
       </CardActions>
       <CardActions>
-        <Link to = {id}>Commencer à lire</Link>
+        <Link to = {`${RouteUrls.MangaDetails}/${id}/${chapters[0].id}`}>Commencer à lire</Link>
       </CardActions>
     </Card>
   );

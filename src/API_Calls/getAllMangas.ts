@@ -5,7 +5,6 @@ export const getAllMangas = async (): Promise<Manga[]> => {
     const response = await fetch(
       "https://api.mangadex.org/manga?limit=100"
     ).then((response) => response.json());
-    console.log(response);
     return response.data;
   } catch (e) {
     console.error(e);
