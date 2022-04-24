@@ -7,6 +7,9 @@ import {
   getDocs,
   query,
   where,
+  doc,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -33,13 +36,6 @@ const db = getFirestore(app);
 
 export default config;
 
-// export async function getMoney(email: string) {
-//   const balanceCol = collection(db, "balance");
-//   const currentBalance = query(balanceCol, where("user_id", "==", `${email}`));
-//   const querySnapshot = await getDocs(currentBalance);
-//   console.log(currentBalance);
-// }
-
 export async function getMoney(email: string) {
   const querySnapshot = await getDocs(collection(db, "balance"));
   const result: number[] = [];
@@ -48,5 +44,20 @@ export async function getMoney(email: string) {
       result.push(doc.get("amount"));
     }
   });
+  console.log(result);
   return result[0];
+}
+
+export async function addMoney(amountToAdd: number, email: string) {
+  const querySnapshot = await getDocs(collection(db, "balance"));
+  var id = "";
+  querySnapshot.forEach((document) => {
+    if (document.get("user_id") === email) {
+      id = document.ref.id;
+      const docRef = doc(db, "balance", id);
+      updateDoc(docRef, {
+        amount: amountToAdd,
+      });
+    }
+  });
 }
