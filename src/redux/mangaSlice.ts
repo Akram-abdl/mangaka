@@ -7,11 +7,13 @@ interface MangaState {
   search: string;
   mangasList: Manga[];
   error?: string;
+  loading: boolean;
 }
 
 const initialState: MangaState = {
   search: "",
   mangasList: [],
+  loading: false,
 };
 
 export const fetchMangas = createAsyncThunk<
@@ -38,9 +40,15 @@ export const mangaSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchMangas.fulfilled, (state, { payload }) => {
       state.mangasList = payload;
+      state.loading = false;
     });
     builder.addCase(fetchMangas.rejected, (state, { payload }) => {
       state.error = payload;
+      state.loading = false;
+    });
+    builder.addCase(fetchMangas.pending, (state, { payload }) => {
+      state.loading = true;
+      state.error = undefined;
     });
   },
 });
