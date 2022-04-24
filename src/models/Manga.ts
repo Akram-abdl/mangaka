@@ -5,5 +5,8 @@ export type Manga = {
         title: {
             en: string;
         }
+        description: {
+            en: string;
+        }
     }
 }
