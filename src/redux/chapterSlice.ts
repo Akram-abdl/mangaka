@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import React from "react";
 import { getAllChapters } from "../API_Calls/getAllChapters";
 import { ChapterList } from "../models/ChapterDetails";
-import { RootState } from "./store";
 
 interface ChapterState {
   chapterList: ChapterList;

@@ -1,8 +1,8 @@
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { addMoney, getMoney } from "../../utils/firebaseSetup";
+import { getMoney } from "../../utils/firebaseSetup";
 
 export default function Profile() {
   const auth = getAuth();

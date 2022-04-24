@@ -1,7 +1,7 @@
 // TODO : manga page details
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Manga } from "../../models/Manga";
 import { getManga } from "../../API_Calls/getManga";
 import { Container, Grid } from "@mui/material";

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import React from "react";
 import { getAllMangas } from "../API_Calls/getAllMangas";
 import { Manga } from "../models/Manga";
 

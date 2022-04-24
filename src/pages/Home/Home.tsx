@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signOut } from "firebase/auth";
 import AppBar from "@mui/material/AppBar";
 import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Manga } from "../../models/Manga";
 import MangaCardComponent from "../../component/MangaItem/MangaCardComponent";
-import { getAllMangas } from "../../API_Calls/getAllMangas";
 import { alpha, Box, InputBase, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -59,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
   const [mangas, setMangas] = useState<Manga[]>([]);
-  const { search, mangasList, error, loading } = useAppSelector(
+  const { search, mangasList, loading } = useAppSelector(
     (store) => store.mangas
   );
   const dispatch = useAppDispatch();
