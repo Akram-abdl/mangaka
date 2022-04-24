@@ -58,10 +58,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
-  const auth = getAuth();
-
   const [mangas, setMangas] = useState<Manga[]>([]);
-  const { search, mangasList, error } = useAppSelector((store) => store.mangas);
+  const { search, mangasList, error, loading } = useAppSelector(
+    (store) => store.mangas
+  );
   const dispatch = useAppDispatch();
 
   const handleChange = (event: any) => {
@@ -83,11 +83,8 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
       setMangas(mangasList);
     }
   }, [search, mangasList]);
-
-  return (
-    <div>
-      <p>Home Page (Protected by Firebase!)</p>
-
+  if (loading) {
+    return (
       <Container>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -98,7 +95,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
               >
-                MANGAKA
+                Home
               </Typography>
               <Search>
                 <SearchIconWrapper>
@@ -114,21 +111,49 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
             </Toolbar>
           </AppBar>
         </Box>
-        <Grid container spacing={4}>
-          {mangas.map((manga) => (
-            <Grid item key={manga.id}>
-              <MangaCardComponent
-                title={manga.attributes.title.en}
-                mangaId={manga.id}
-                description={manga.attributes.description.en}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <Typography>Loading mangas...</Typography>
       </Container>
-
-      <button onClick={() => signOut(auth)}>Sign out of Firebase</button>
-    </div>
+    );
+  }
+  return (
+    <Container>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              Home
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                value={search}
+                onChange={handleChange}
+              />
+            </Search>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <Grid container spacing={4}>
+        {mangas.map((manga) => (
+          <Grid item key={manga.id}>
+            <MangaCardComponent
+              title={manga.attributes.title.en}
+              mangaId={manga.id}
+              description={manga.attributes.description.en}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

@@ -16,6 +16,8 @@ import ReadChapter from "./pages/ReadChapter/ReadChapter";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import AppBarComponent from "./component/AppBar/AppBarComponent";
+import Profile from "./pages/Profile/Profile";
 
 initializeApp(config.firebaseConfig);
 const theme = createTheme();
@@ -25,6 +27,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
+          <AppBarComponent />
           <Routes>
             <Route
               path={RouteUrls.Root}
@@ -51,6 +54,7 @@ function App() {
               }
             />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
