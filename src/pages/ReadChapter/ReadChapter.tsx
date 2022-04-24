@@ -1,17 +1,9 @@
-import {
-  Button,
-  Container,
-  Grid,
-  ImageList,
-  ImageListItem,
-} from "@mui/material";
+import { Container, ImageList, ImageListItem } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getChapter } from "../../API_Calls/getChapter";
 import { ChapterPage } from "../../models/ChapterPage";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { RouteUrls } from "../../config";
 
 export default function ReadChapter() {
@@ -34,13 +26,8 @@ export default function ReadChapter() {
     async function fetchChapter() {
       await getAllPages();
     }
-    console.log("useEffect");
     fetchChapter();
   }, [getAllPages]);
-
-  // if (!manga) {
-  //   return navigate("/");
-  // }
 
   if (!chapter || !chapterId) {
     return <div>Chargement du chapitre...</div>;

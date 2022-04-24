@@ -45,5 +45,4 @@ export const chapterSlice = createSlice({
 });
 
 export const { setChapter } = chapterSlice.actions;
-export const selectChapter = (state: RootState) => state.chapter;
 export default chapterSlice.reducer;
