@@ -54,7 +54,12 @@ function App() {
               }
             />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={
+              <AuthRoute>
+                <Profile />  
+              </AuthRoute>
+              } 
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
